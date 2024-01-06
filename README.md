@@ -22,7 +22,7 @@ This code implements a Halo 2 circuit for verifying a wallet address.
     wasm-pack build --target nodejs --out-dir pkg
     ```
 
-you will find the wasm file in the `pkg` folder.
+you will find the `zero_node_wallet_circuit_bg.wasm` file in the `pkg` folder.
 
 ## Build executable file
 
@@ -33,7 +33,7 @@ cargo build --release
 ## Generate verify smart contract
 
 ```shell
-target/release/halo2-simple-circuit solidity
+target/release/zero-node-wallet-circuit solidity
 ```
 
 You will find `Verifier.sol` under the current folder.

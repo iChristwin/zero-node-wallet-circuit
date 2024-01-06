@@ -1,0 +1,11 @@
+{
+  "name": "zero-node-wallet-circuit",
+  "version": "0.1.0",
+  "files": [
+    "zero_node_wallet_circuit_bg.wasm",
+    "zero_node_wallet_circuit.js",
+    "zero_node_wallet_circuit.d.ts"
+  ],
+  "main": "zero_node_wallet_circuit.js",
+  "types": "zero_node_wallet_circuit.d.ts"
+}
