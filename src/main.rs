@@ -3,6 +3,10 @@ pub mod opts;
 use std::marker::PhantomData;
 use std::{fs, io::BufReader};
 
+use zero_node_wallet_circuit::{
+    circuits::wallet::WalletCircuit,
+    generator::{gen_pk, gen_proof, gen_sol_verifier},
+};
 use clap::Parser;
 use halo2_curves::bn256::{Bn256, Fr, G1Affine};
 use halo2_curves::serde::SerdeObject;
@@ -15,10 +19,6 @@ use halo2_proofs::{
         VerificationStrategy,
     },
     transcript::TranscriptReadBuffer,
-};
-use halo2_simple_circuit::{
-    circuits::wallet::WalletCircuit,
-    generator::{gen_pk, gen_proof, gen_sol_verifier},
 };
 use itertools::Itertools;
 use opts::{Opts, Subcommands};
@@ -93,8 +93,6 @@ fn main() {
         }
 
         Subcommands::Prove { input } => {
-            // let input_v: JsonValue = serde_json::from_str(&input).unwrap();
-            // let item_str = &input_v.as_array().unwrap()[0].as_str().unwrap();
             let v: JsonValue = serde_json::from_str(&input).unwrap();
             let address_str = v["wallet_address"]
                 .as_str()
@@ -105,15 +103,6 @@ fn main() {
             let address = Fr::from_raw_bytes_unchecked(
                 &[vec![0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], address].concat(),
             );
-
-            // let address = match Fr::from_raw_bytes(&address_bytes) {
-            //     Some(value) => dbg!(value),
-            //     None => Fr::ZERO
-            // };
-            //     // let private_a = Fr::from(v["private_a"].as_u64().unwrap());
-            //     // let private_b = Fr::from(v["private_b"].as_u64().unwrap());
-
-            //     // let constant = Fr::from(4);
 
             let pk = gen_pk(&params, &empty_circuit);
 
